@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "smoke": "npx playwright test --grep @Smoke --project=chromium",
+    "regression": "npx playwright test --grep @Regression --project=chromium"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
