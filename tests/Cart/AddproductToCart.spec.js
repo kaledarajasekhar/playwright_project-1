@@ -2,7 +2,7 @@ import { test } from '../../Fixtures/BaseFixture.js';
 import { expect } from '@playwright/test';
 import { CheapComputerConfigurations } from '../../TestData/ProductData.js'
 
-test('validate product added in shopping cart', async ({ poManager, page }) => {
+test('validate product added in shopping cart', async ({ poManager, page  }) => {
 
     const homePage = poManager.getHomePage();
     const computersPage = poManager.getComputersPage();

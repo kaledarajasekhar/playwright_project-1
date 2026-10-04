@@ -19,7 +19,7 @@ test.describe('validate desktop', () => {
         await computersPage.clickOnDesktops();
     })
 
-    test(' title, print product titles , prices and count', async ({ page }) => {
+    test('@Smoke title, print product titles , prices and count', async ({ page }) => {
         await expect(page).toHaveTitle('Demo Web Shop. Desktops');
         const titles = await desktopPage.getAllProductTitles();
         const prices = await desktopPage.getAllProductPrices();
@@ -30,28 +30,28 @@ test.describe('validate desktop', () => {
         }
     })
 
-    test('all product titles sort in A-Z', async () => {
+    test('@Regression all product titles sort in A-Z', async () => {
         await desktopPage.sortProducts('Name: A to Z');
         const actualTitles = await desktopPage.getAllProductTitles();
         const expectTitles = [...actualTitles].sort();
         await expect(actualTitles).toEqual(expectTitles);
     })
 
-    test('all product titles sort in Z-A', async () => {
+    test('@Regression all product titles sort in Z-A', async () => {
         await desktopPage.sortProducts('Name: Z to A');
         const actualTitles = await desktopPage.getAllProductTitles();
         const expectedTitles = [...actualTitles].sort().reverse();
         await expect(actualTitles).toEqual(expectedTitles);
     })
 
-    test('product prices sort in LOW-HIGH ', async () => {
+    test('@Smoke product prices sort in LOW-HIGH ', async () => {
         await desktopPage.sortProducts('Price: Low to High');
         const actualPrices = await desktopPage.getAllProductPrices();
         const expectedPrices = [...actualPrices].sort((a, b) => a - b);
         await expect(actualPrices).toEqual(expectedPrices);
     })
 
-    test('all product prices sort in HIGH-LOW', async () => {
+    test('@Regression @Smoke all product prices sort in HIGH-LOW', async () => {
         await desktopPage.sortProducts('Price: High to Low');
         const actualPrices = await desktopPage.getAllProductPrices();
         const expectedPrices = [...actualPrices].sort((a, b) => b - a)

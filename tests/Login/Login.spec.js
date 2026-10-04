@@ -4,7 +4,7 @@ import { expect } from '@playwright/test';
 
 for (const data of LoginTestdata) {
 
-    test(`login with ${data.scenario}`, async ({ page, poManager }) => {
+    test(` @Regression login with ${data.scenario}`, async ({ page, poManager }) => {
 
         const homePage = poManager.getHomePage();
         const loginPage = poManager.getLoginPage();

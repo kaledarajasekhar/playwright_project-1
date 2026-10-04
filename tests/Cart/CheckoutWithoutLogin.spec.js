@@ -25,5 +25,4 @@ test('checkout without login redirects to login page', async ({ poManager, page 
     await expect(page).toHaveTitle('Demo Web Shop. Login');
     await homePage.clickOnShoppingCart();
     await cartPage.removeProduct(data);
-
 })

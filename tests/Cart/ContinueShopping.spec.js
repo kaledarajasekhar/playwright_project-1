@@ -26,6 +26,4 @@ test('continue shopping from cart', async ({ poManager , page }) => {
     await expect(await desktopPage.getAllProductsCount()).toBe(6);
     await homePage.clickOnShoppingCart();
     await cartPage.removeProduct(data);
-
-
 })
