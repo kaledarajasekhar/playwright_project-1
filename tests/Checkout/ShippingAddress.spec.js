@@ -1,38 +1,53 @@
-import { test } from '../../Fixtures/BaseFixture.js';
-import { expect } from '@playwright/test';
-import { CheapComputerConfigurations } from '../../TestData/ProductData.js';
-import { LoginTestdata } from '../../TestData/LoginData.js';
+// import { test } from '../../Fixtures/BaseFixture.js';
+// import { expect } from '@playwright/test';
+// import { CheapComputerConfigurations } from '../../TestData/ProductData.js';
+// import { LoginTestdata } from '../../TestData/LoginData.js';
 
-test('select shipping address and pickup in store', async ({ poManager, page }) => {
+// test('select shipping address and pickup in store', async ({ poManager, page }) => {
 
-    const homePage = poManager.getHomePage();
-    const loginPage = poManager.getLoginPage();
-    const computersPage = poManager.getComputersPage();
-    const desktopPage = poManager.getDesktopPage();
-    const productPage = poManager.getProductPage();
-    const cartPage = poManager.getCartPage();
-    const checkoutPage = poManager.getCheckoutPage();
-    const data = CheapComputerConfigurations[1];
-    const loginData = LoginTestdata[0];
+//     const homePage = poManager.getHomePage();
+//     const loginPage = poManager.getLoginPage();
+//     const computersPage = poManager.getComputersPage();
+//     const desktopPage = poManager.getDesktopPage();
+//     const productPage = poManager.getProductPage();
+//     const cartPage = poManager.getCartPage();
+//     const checkoutPage = poManager.getCheckoutPage();
+//     const data = CheapComputerConfigurations[1];
+//     const loginData = LoginTestdata[0];
 
-    await homePage.clickOnLogin();
-    await loginPage.login(loginData);
-    await homePage.clickOnComputers();
-    await computersPage.clickOnDesktops();
-    await desktopPage.clickOnBuildYourOwnCheapComputer();
-    await productPage.configureAndAddProductToCart(data);
-    await expect(productPage.cartSuccessMessage).toHaveText('The product has been added to your shopping cart');
-    await homePage.clickOnShoppingCart();
-    const item = await cartPage.getCartItemByConfiguration(`Processor: ${data.processor}`);
-    await expect(item).toBeVisible();
-    await cartPage.clickOnTermsAndConditions();
-    await cartPage.clickOnCheckout();
-    await expect(page).toHaveTitle('Demo Web Shop. Checkout');
-    await checkoutPage.selectSavedBillingAddressAndContinue();
-    await expect(checkoutPage.shippingAddressDropdown).toBeVisible();
-    await checkoutPage.clickOnPickUpInStore();
-    await checkoutPage.continueShippingAddress();
-    await expect(checkoutPage.paymentMethod).toBeVisible();
-    await homePage.clickOnShoppingCart();
-    await cartPage.removeProduct(data);
-})
+//     await homePage.clickOnLogin();
+//     await loginPage.login(loginData);
+//     await homePage.clickOnComputers();
+//     await computersPage.clickOnDesktops();
+//     await desktopPage.clickOnBuildYourOwnCheapComputer();
+//     await productPage.configureAndAddProductToCart(data);
+//     await expect(productPage.cartSuccessMessage).toHaveText('The product has been added to your shopping cart');
+//     await homePage.clickOnShoppingCart();
+//     const item = await cartPage.getCartItemByConfiguration(`Processor: ${data.processor}`);
+//     await expect(item).toBeVisible();
+//     await cartPage.clickOnTermsAndConditions();
+//     await cartPage.clickOnCheckout();
+//     await expect(page).toHaveTitle('Demo Web Shop. Checkout');
+//     await checkoutPage.selectSavedBillingAddressAndContinue();
+//     await expect(checkoutPage.shippingAddressDropdown).toBeVisible();
+//     await checkoutPage.clickOnPickUpInStore();
+//     await checkoutPage.continueShippingAddress();
+//     await expect(checkoutPage.paymentMethod).toBeVisible();
+//     await homePage.clickOnShoppingCart();
+//     await cartPage.removeProduct(data);
+// })
+
+
+import { test, expect } from '../../Fixtures/CheckoutFixture.js';
+
+test('select shipping address and pickup in store',
+    async ({ checkoutSetup }) => {
+
+        const { poManager } = checkoutSetup;
+        const checkoutPage = poManager.getCheckoutPage();
+
+        // Fixture has already selected In-Store Pickup.
+        // Verify checkout reached the payment method step.
+        await expect(checkoutPage.paymentMethod).toBeVisible();
+    }
+);
